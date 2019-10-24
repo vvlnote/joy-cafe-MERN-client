@@ -5,6 +5,7 @@ import { fetchDishes } from '../actions/types';
 import { prepareForCheckOut } from '../actions/types';
 import { updateIngredientIneventory } from '../actions/types';
 import { connect } from 'react-redux';
+import images from '../components/images';
 
 class DishesContainer extends Component {
 
@@ -101,10 +102,17 @@ class DishesContainer extends Component {
 		})
 	}
 
+	findDishImage = (dishName) => {
+		return (images.filter(imageItem => 
+			imageItem.title.toLowerCase() === dishName.toLowerCase()))[0].id;
+	}
+
 	render() {
 
 		let dishes = this.props.dishes.map((dish, i) => {
-			return <ADish key={i} dish={dish} totalOrders={this.state} getData={this.getOrderedDish}/>
+			let imageId = this.findDishImage(dish.name);
+			debugger;
+			return <ADish key={i} dish={dish} imageId={imageId} totalOrders={this.state} getData={this.getOrderedDish}/>
 		});
 
 		let displayOrders = null;
