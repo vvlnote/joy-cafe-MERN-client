@@ -1,5 +1,5 @@
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "http://localhost:4000";
 
 export function fetchDishes() {
 	return (dispatch) => {	
@@ -15,6 +15,7 @@ export function fetchDishes() {
 
 export function fetchIngredients() {
 	return (dispatch) => {
+		debugger;
 		fetch(`${BASE_URL}/ingredients`)
 		.then(resp => resp.json())
 		.then(ingredients => restructuredIngredientsData(ingredients))
@@ -26,10 +27,10 @@ export function fetchIngredients() {
 }
 
 export function placeOrder(id, data) {
-	console.log('C')
 	return (dispatch) => {
-		fetch(`${BASE_URL}/dishes/${id}`, {
-			method: 'PUT',
+		debugger;
+		fetch(`${BASE_URL}/dishes/update/${id}`, {
+			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify(data)
 		})
@@ -50,8 +51,8 @@ export function prepareForCheckOut(tableId, receipts) {
 
 export function updateIngredientIneventory(ingredient) {
 	return (dispatch) => {
-		fetch(`${BASE_URL}/ingredients/${ingredient.id}`, {
-			method: 'PUT',
+		fetch(`${BASE_URL}/ingredients/update/${ingredient.id}`, {
+			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			body:JSON.stringify(ingredient)
 		})
@@ -72,27 +73,29 @@ export function orderPaid(order){
 }
 
 function restructuredDishesData(dishes) {
-	let restucturedDishes = dishes.map((dish) => {
+	debugger;
+	let restructuredDishes = dishes.map((dish) => {
 		let iArray = [];
-		for (let i = 0; i < dish.dish_ingredients.length; i++){
+		for (let i = 0; i < dish.ingredients.length; i++){
 			let ingredientObj = {
-				id: dish.ingredients[i].id,
-				name: dish.ingredients[i].name,
-				usage: dish.dish_ingredients[i].used_amount
+				id: dish.ingredients[i].ingredient._id,
+				name: dish.ingredients[i].ingredient.name,
+				usage: dish.ingredients[i].used_amount
 			}
 			iArray.push(ingredientObj);
 		}
 		let obj = {};
-		obj = {id: dish.id, name: dish.name, price: dish.price, total_orders: dish.total_orders, newly_orders: 0,
+		obj = {id: dish._id, name: dish.name, price: dish.price, total_orders: dish.total_orders, newly_orders: 0,
 				ingredients: iArray, needUpdate: false}
 		return obj;
 	})
-	return restucturedDishes;
+	console.log('restructuredDishes: ', restructuredDishes);
+	return restructuredDishes;
 }
 
 function restructuredIngredientsData(ingredients) {
 	let restructuredData = ingredients.map((ingredient) => {
-		let obj = {id: ingredient.id, name: ingredient.name, alert: ingredient.alert, available_amount: ingredient.available_amount,
+		let obj = {id: ingredient._id, name: ingredient.name, alert: ingredient.alert, available_amount: ingredient.available_amount,
 		           low_amount_alert: ingredient.low_amount_alert, 
 		           unit_cost: ingredient.unit_cost, used_amount: ingredient.used_amount};
 		return obj;

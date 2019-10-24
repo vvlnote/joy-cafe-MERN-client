@@ -17,9 +17,15 @@ class InventoryContainer extends Component {
 
 	inventoryTableHeader() {
 		let header = Object.keys(this.props.ingredients[0]);
-		return header.map((key, index) => {
-			return <th key={index}>{key.toUpperCase()}</th>
-		})
+		let headerArr = [];
+		for (let i = 1; i < header.length; i++) { //skip the id column
+			let item = <th key={i} style={{textAlign:'center'}}>{header[i].toUpperCase()}</th>
+			headerArr.push(item);
+		}
+		return headerArr;
+		// return header.map((key, index) => {
+		// 	return <th key={index}>{key.toUpperCase()}</th>
+		// })
 	}
 
 	handleOnClick(ingredient, event){
@@ -38,9 +44,7 @@ class InventoryContainer extends Component {
 		return this.props.ingredients.map((ingredient, i) => {
 			let backgroudColor = (ingredient.alert ? 'red': 'lightgrey');
 			return (
-
 				<tr key={i} style={{textAlign:'center', backgroundColor:`${backgroudColor}`}}>
-					<td>{ingredient.id}</td>
 					<td>{ingredient.name}</td>
 					<td>{ingredient.alert === true ? 'true': 'false'}</td>
 					<td>{ingredient.available_amount}</td>

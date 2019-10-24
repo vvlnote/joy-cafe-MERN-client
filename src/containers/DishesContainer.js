@@ -40,13 +40,13 @@ class DishesContainer extends Component {
 	}
 
 	onHandlePlaceOrder = () => {
-		//console.log("in onHandlePlaceOrder");
+		debugger;
 		this.setState({displayOrders: true})
 		this.setState({disablePlaceOrderButton: false})
-		//console.log(this.orders);
 		let checkOutReceipts = [];
 		let ingredientsUsage = [];
 		this.orders.forEach((e) => {
+			debugger;
 			let dish = this.props.dishes.find((dish) => e.dishId === dish.id);
 			if (e.orders > 0){
 				dish.total_orders = dish.total_orders + e.orders;
@@ -64,6 +64,7 @@ class DishesContainer extends Component {
 
 	collectIngredientUsage(ingredientUsage, orders, dish){
 		dish.ingredients.forEach((dIngredient) =>{
+			debugger;
 			let dishIngredientsUsage = dIngredient.usage * orders;
 			if (ingredientUsage.length > 0) {
 				let index = ingredientUsage.findIndex((item) => item.id === dIngredient.id);
@@ -84,6 +85,7 @@ class DishesContainer extends Component {
 	}
 
 	updateIngredientUsage(ingredient, usage) {
+		debugger;
 		ingredient.available_amount -= usage;
 		ingredient.used_amount += usage;
 		if (ingredient.available_amount <= ingredient.low_amount_alert) {

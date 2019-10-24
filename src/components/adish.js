@@ -10,7 +10,7 @@ class ADish extends Component {
 	onHandleIncrease = () =>{
 
 		this.setState({
-			orders: this.state.orders += 1
+			orders: ++this.state.orders 
 		})
 
 		this.props.getData(this.state);
@@ -19,7 +19,7 @@ class ADish extends Component {
 	onHandleDecrease = () =>{
 		if(this.state.orders > 0)
 		{
-			this.setState({orders: this.state.orders -= 1})
+			this.setState({orders: --this.state.orders})
 		}
 		
 		this.props.getData(this.state);
@@ -29,7 +29,7 @@ class ADish extends Component {
 		
 		return(
 			<div>
-				<h4>{this.state.dishId} - {this.props.dish.name} - ${this.props.dish.price}</h4>
+				<h4>{this.props.dish.name} - ${this.props.dish.price}</h4>
 				<button onClick={this.onHandleIncrease}>+</button>
 				<span>{this.state.orders}</span>
 				<button onClick={this.onHandleDecrease}>-</button>

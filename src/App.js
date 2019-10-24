@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchIngredients } from './actions/types'
 import DishesContainer from './containers/DishesContainer';
-import { BrowserRouter as Router, Switch, Route, Link }  from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route }  from 'react-router-dom';
 import Navbar from './components/navbar';
 import Home from './containers/Home';
 // import Navigation from './components/Navigation';

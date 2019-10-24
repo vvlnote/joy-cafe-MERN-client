@@ -19,7 +19,7 @@ class IngredientOrderForm extends Component {
 		event.preventDefault();
 
 		let obj = this.props.ingredient;
-		obj.available_amount = obj.available_amount + parseFloat(this.state.amount);
+		obj.available_amount = obj.available_amount + parseFloat(this.state.amount).toFixed(2);
 		if (obj.available_amount > obj.low_amount_alert){
 			obj.alert = false;
 		}
