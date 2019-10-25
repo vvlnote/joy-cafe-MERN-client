@@ -6,6 +6,7 @@ import { prepareForCheckOut } from '../actions/types';
 import { updateIngredientIneventory } from '../actions/types';
 import { connect } from 'react-redux';
 import images from '../components/images';
+import Button from 'react-bootstrap/Button';
 
 class DishesContainer extends Component {
 
@@ -128,7 +129,7 @@ class DishesContainer extends Component {
 			<h2> {this.props.match.params.id} to Order</h2>
 			<div>
 				{dishes}
-				<button disabled={!this.state.disablePlaceOrderButton} onClick={this.onHandlePlaceOrder}>Place Order</button>
+				<Button variant="light" disabled={!this.state.disablePlaceOrderButton} onClick={this.onHandlePlaceOrder}>Place Order</Button>
 				{displayOrders}
 			</div>
 			</div>	

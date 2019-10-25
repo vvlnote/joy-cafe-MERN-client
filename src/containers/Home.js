@@ -6,6 +6,7 @@ import AnOrder from '../components/anOrder';
 import { orderPaid } from '../actions/types';
 
 
+
 class Home extends Component {
  
 

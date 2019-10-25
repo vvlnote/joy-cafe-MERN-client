@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 
 class AnOrder extends Component {
@@ -20,7 +21,7 @@ class AnOrder extends Component {
 			{orderDetail}
 			<hr/>
 			<span>Total: ${totalPrice.toFixed(2)}</span>
-			<button onClick={this.onHandlePayment}>Pay</button>
+			<Button variant='light' onClick={this.onHandlePayment}>Pay</Button>
 			</div>
 		)
 	}

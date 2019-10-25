@@ -45,9 +45,16 @@ class ADish extends Component {
 		const style = {
 			image: {
 				width:"200pt",
-				height:"200pt"
+				height:"200pt",
+				float:'left',
+				border:"outset",
+				borderColor:"gray"
 
 			}
+		}
+		const clearfix = {
+			overflow:"auto",
+			padding:'2px'
 		}
 
 		const imagePath = require.context('../../public/dishImages', true);
@@ -57,11 +64,13 @@ class ADish extends Component {
 	
 
 		return(
-			<div>
+			<div style={clearfix}>
 				<img src={`${image}`} style ={style.image}/>
-				<h4>{this.props.dish.name} - ${this.props.dish.price}</h4>
+				<h3>{this.props.dish.name} - ${this.props.dish.price}</h3>
+				<h4>Order:{this.state.orders}</h4>
+
 				<button onClick={this.onHandleIncrease}>+</button>
-				<span>{this.state.orders}</span>
+				
 				<button onClick={this.onHandleDecrease}>-</button>
 			</div>
 		) 
